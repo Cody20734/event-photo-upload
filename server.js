@@ -3,6 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { google } = require('googleapis');
+const fetch = require('node-fetch'); // 👈 Required
+global.Headers = fetch.Headers;      // 👈 Fixes the Headers error
 
 const app = express();
 
