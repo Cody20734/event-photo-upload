@@ -4,11 +4,11 @@
   "description": "Upload and view event photos with Google Drive backup",
   "main": "server.js",
   "scripts": {
-    "start": "start": "node server.js",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "16.x"
+    "node": ">=18"
   },
   "keywords": [],
   "author": "",
