@@ -1,14 +1,17 @@
-app.use('/uploads', express.static('uploads'));
-
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
 const app = express();
 
-// Serve static files (the HTML form)
+// ✅ Serve uploaded files publicly
+app.use('/uploads', express.static('uploads'));
+
+// ✅ Serve static files (like your HTML form in /public)
 app.use(express.static('public'));
 
-// Set up storage config
+// ✅ Multer storage config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -21,22 +24,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Handle upload
+// ✅ File upload endpoint
 app.post('/upload', upload.single('photo'), (req, res) => {
   console.log(`✅ Received file: ${req.file.filename}`);
   res.send(`<h3>✅ Photo uploaded successfully!</h3><a href="/">Upload Another</a>`);
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
-
-
-
-const fs = require('fs');
-
+// ✅ Gallery route
 app.get('/gallery', (req, res) => {
   const uploadDir = path.join(__dirname, 'uploads');
 
@@ -73,3 +67,8 @@ app.get('/gallery', (req, res) => {
   });
 });
 
+// ✅ Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
