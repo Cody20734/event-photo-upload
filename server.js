@@ -25,7 +25,7 @@ const upload = multer({ storage });
 // Upload to Google Drive
 async function uploadToDrive(filename, filepath) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: 'credentials.json',
+    credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
     scopes: ['https://www.googleapis.com/auth/drive.file'],
   });
 
