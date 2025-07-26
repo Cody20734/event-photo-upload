@@ -1,15 +1,18 @@
 {
   "name": "event-photo-upload",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Upload and view event photos with Google Drive backup",
+  "main": "server.js",
   "scripts": {
     "start": "node --openssl-legacy-provider server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^5.1.0",
     "googleapis": "^154.0.0",
