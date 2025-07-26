@@ -27,8 +27,12 @@ const upload = multer({ storage });
 
 // Upload to Google Drive
 async function uploadToDrive(filename, filepath) {
+  const parsedCredentials = JSON.parse(
+    process.env.GOOGLE_CREDENTIALS.replace(/\\n/g, '\n')
+  );
+
   const auth = new google.auth.GoogleAuth({
-    credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+    credentials: parsedCredentials,
     scopes: ['https://www.googleapis.com/auth/drive.file'],
   });
 
@@ -36,7 +40,7 @@ async function uploadToDrive(filename, filepath) {
 
   const fileMetadata = {
     name: filename,
-    parents: ['1qwVYslvgA0yG4R26JdQ3TEzPgUNbK0tN']
+    parents: ['1qwVYslvgA0yG4R26JdQ3TEzPgUNbK0tN'] // Your folder ID
   };
 
   const media = {
