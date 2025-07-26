@@ -36,7 +36,6 @@ app.listen(PORT, () => {
 
 
 const fs = require('fs');
-const path = require('path');
 
 app.get('/gallery', (req, res) => {
   const uploadDir = path.join(__dirname, 'uploads');
