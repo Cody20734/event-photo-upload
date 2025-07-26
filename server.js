@@ -1,3 +1,4 @@
+console.log('NODE_OPTIONS:', process.env.NODE_OPTIONS);
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
