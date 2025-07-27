@@ -27,9 +27,7 @@ const upload = multer({ storage });
 
 // Upload to Google Drive
 async function uploadToDrive(filename, filepath) {
-  const parsedCredentials = JSON.parse(
-    process.env.GOOGLE_CREDENTIALS.replace(/\\n/g, '\n')
-  );
+  const parsedCredentials = JSON.parse(fs.readFileSync('credentials.json', 'utf-8')); // ✅ fixed
 
   const auth = new google.auth.GoogleAuth({
     credentials: parsedCredentials,
@@ -40,7 +38,7 @@ async function uploadToDrive(filename, filepath) {
 
   const fileMetadata = {
     name: filename,
-    parents: ['1qwVYslvgA0yG4R26JdQ3TEzPgUNbK0tN'] // Your folder ID
+    parents: ['1qwVYslvgA0yG4R26JdQ3TEzPgUNbK0tN'] // 👈 Replace with your folder ID if needed
   };
 
   const media = {
@@ -50,7 +48,7 @@ async function uploadToDrive(filename, filepath) {
 
   const result = await drive.files.create({
     resource: fileMetadata,
-    media: media,
+    media,
     fields: 'id',
   });
 
